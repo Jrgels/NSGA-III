@@ -6,22 +6,21 @@ import torch.nn as nn
 
 
 class MLPPolicy(nn.Module):
-    """
-    Política MLP determinista para espacios de acción continuos.
-
-    Entrada:
-        observación del ambiente
-
-    Salida:
-        acción continua en el rango real del ambiente
-    """
-
-    def __init__(self, obs_dim: int, action_dim: int, hidden_dim: int = 64):
+    def __init__(
+        self,
+        obs_dim: int,
+        action_dim: int,
+        hidden_dim: int = 64,
+        action_type: str = "continuous",
+    ):
         super().__init__()
 
         self.obs_dim = obs_dim
         self.action_dim = action_dim
         self.hidden_dim = hidden_dim
+        self.action_type = action_type
+
+        final_activation = nn.Tanh() if action_type == "continuous" else nn.Identity()
 
         self.net = nn.Sequential(
             nn.Linear(obs_dim, hidden_dim),
@@ -29,7 +28,7 @@ class MLPPolicy(nn.Module):
             nn.Linear(hidden_dim, hidden_dim),
             nn.Tanh(),
             nn.Linear(hidden_dim, action_dim),
-            nn.Tanh(),
+            final_activation,
         )
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
@@ -39,16 +38,10 @@ class MLPPolicy(nn.Module):
     def act(
         self,
         obs: np.ndarray,
-        action_low: np.ndarray,
-        action_high: np.ndarray,
         device: torch.device,
-    ) -> np.ndarray:
-        """
-        Produce una acción en el rango válido del ambiente.
-
-        La red produce valores en [-1, 1].
-        Luego se reescalan al rango [action_low, action_high].
-        """
+        action_low: np.ndarray | None = None,
+        action_high: np.ndarray | None = None,
+    ):
         self.eval()
 
         obs_tensor = torch.as_tensor(
@@ -57,7 +50,12 @@ class MLPPolicy(nn.Module):
             device=device,
         ).unsqueeze(0)
 
-        action = self.forward(obs_tensor).squeeze(0).cpu().numpy()
+        raw_action = self.forward(obs_tensor).squeeze(0)
+
+        if self.action_type == "discrete":
+            return int(torch.argmax(raw_action).item())
+
+        action = raw_action.cpu().numpy()
 
         scaled_action = action_low + (action + 1.0) * 0.5 * (
             action_high - action_low
@@ -66,13 +64,11 @@ class MLPPolicy(nn.Module):
         return np.clip(scaled_action, action_low, action_high).astype(np.float32)
 
     def clone(self) -> "MLPPolicy":
-        """
-        Crea una copia independiente de la política.
-        """
         cloned = MLPPolicy(
             obs_dim=self.obs_dim,
             action_dim=self.action_dim,
             hidden_dim=self.hidden_dim,
+            action_type=self.action_type,
         )
         cloned.load_state_dict(self.state_dict())
         return cloned

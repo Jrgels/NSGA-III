@@ -1,0 +1,41 @@
+{
+    "env_id": "mo-walker2d-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 2,
+    "final_hypervolume": 947260.875,
+    "reference_point": [
+        -30.35173797607422,
+        15.788228988647461
+    ],
+    "nondominated_count": 13,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-walker2d-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 8,
+            "objectives": [
+                1181.3111572265625,
+                776.7146606445312
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-walker2d-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 7,
+            "objectives": [
+                977.93310546875,
+                955.265625
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-walker2d-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 3,
+            "objectives": [
+                1079.2110595703125,
+                821.6426391601562
+            ]
+        }
+    }
+}

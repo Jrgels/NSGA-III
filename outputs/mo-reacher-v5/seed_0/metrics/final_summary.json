@@ -1,0 +1,49 @@
+{
+    "env_id": "mo-reacher-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 4,
+    "final_hypervolume": 1509243.63603,
+    "reference_point": [
+        7.096813201904297,
+        -19.1320858001709,
+        -8.242807388305664,
+        -17.097043991088867
+    ],
+    "nondominated_count": 64,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-reacher-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 43,
+            "objectives": [
+                39.52220153808594,
+                -12.889812469482422,
+                8.25230884552002,
+                2.1495370864868164
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-reacher-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 36,
+            "objectives": [
+                5.125594139099121,
+                34.66097640991211,
+                21.98744773864746,
+                10.960713386535645
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-reacher-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 33,
+            "objectives": [
+                25.3958740234375,
+                11.427462577819824,
+                18.73651695251465,
+                16.413278579711914
+            ]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+policy_id,checkpoint_path,objective_0,objective_1
+0,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_000.pt,993.35888671875,944.70556640625
+1,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_001.pt,1121.5631103515625,787.6279907226562
+2,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_002.pt,982.5275268554688,954.730224609375
+3,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_003.pt,1079.2110595703125,821.6426391601562
+4,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_004.pt,1045.38427734375,916.2090454101562
+5,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_005.pt,1156.5914306640625,784.9519653320312
+6,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_006.pt,1005.8358764648438,920.1038208007812
+7,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_007.pt,977.93310546875,955.265625
+8,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_008.pt,1181.3111572265625,776.7146606445312
+9,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_009.pt,1156.746826171875,781.5734252929688
+10,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_010.pt,994.25341796875,944.4248657226562
+11,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_011.pt,1045.845703125,904.9011840820312
+12,outputs/mo-walker2d-v5/seed_0/checkpoints/pareto_front/policy_012.pt,1036.0789794921875,917.6821899414062

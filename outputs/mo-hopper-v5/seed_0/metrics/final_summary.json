@@ -1,0 +1,45 @@
+{
+    "env_id": "mo-hopper-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 3,
+    "final_hypervolume": 588555795.84768,
+    "reference_point": [
+        6.026621341705322,
+        -24.336076736450195,
+        22.149301528930664
+    ],
+    "nondominated_count": 64,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-hopper-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 44,
+            "objectives": [
+                1028.42431640625,
+                500.777099609375,
+                948.66064453125
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-hopper-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 10,
+            "objectives": [
+                1000.54052734375,
+                578.1099243164062,
+                711.9396362304688
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-hopper-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 28,
+            "objectives": [
+                1021.0001831054688,
+                538.8563842773438,
+                864.8605346679688
+            ]
+        }
+    }
+}

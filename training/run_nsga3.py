@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import random
+from gymnasium.spaces import Box, Discrete
 from pathlib import Path
 
 import numpy as np
@@ -30,6 +31,7 @@ def save_policy(policy: MLPPolicy, path: Path) -> None:
             "obs_dim": policy.obs_dim,
             "action_dim": policy.action_dim,
             "hidden_dim": policy.hidden_dim,
+            "action_type": policy.action_type,
         },
         path,
     )
@@ -88,7 +90,14 @@ def run_nsga3(
     env = make_env(env_id)
 
     obs_dim = int(np.prod(env.observation_space.shape))
-    action_dim = int(np.prod(env.action_space.shape))
+    if isinstance(env.action_space, Box):
+        action_dim = int(np.prod(env.action_space.shape))
+        action_type = "continuous"
+    elif isinstance(env.action_space, Discrete):
+        action_dim = env.action_space.n
+        action_type = "discrete"
+    else:
+        raise ValueError(f"Action space no soportado: {env.action_space}")
 
     obs, info = env.reset(seed=seed)
     _, reward, _, _, _ = env.step(env.action_space.sample())
@@ -119,7 +128,12 @@ def run_nsga3(
     representative_dir.mkdir(parents=True, exist_ok=True)
 
     population = [
-        MLPPolicy(obs_dim=obs_dim, action_dim=action_dim, hidden_dim=hidden_dim).to(device)
+        MLPPolicy(
+        obs_dim=obs_dim,
+        action_dim=action_dim,
+        hidden_dim=hidden_dim,
+        action_type=action_type,
+    ).to(device)
         for _ in range(population_size)
     ]
 

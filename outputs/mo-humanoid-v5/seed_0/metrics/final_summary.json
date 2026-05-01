@@ -1,0 +1,41 @@
+{
+    "env_id": "mo-humanoid-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 2,
+    "final_hypervolume": 425765.46875,
+    "reference_point": [
+        134.5294647216797,
+        134.0362548828125
+    ],
+    "nondominated_count": 1,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-humanoid-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 0,
+            "objectives": [
+                809.265869140625,
+                765.0463256835938
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-humanoid-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 0,
+            "objectives": [
+                809.265869140625,
+                765.0463256835938
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-humanoid-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 0,
+            "objectives": [
+                809.265869140625,
+                765.0463256835938
+            ]
+        }
+    }
+}

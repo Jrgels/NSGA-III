@@ -1,0 +1,41 @@
+{
+    "env_id": "mo-swimmer-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 2,
+    "final_hypervolume": 5131.34814453125,
+    "reference_point": [
+        -18.98379135131836,
+        -210.20884704589844
+    ],
+    "nondominated_count": 64,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-swimmer-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 19,
+            "objectives": [
+                226.5823974609375,
+                -444.7852478027344
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-swimmer-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 24,
+            "objectives": [
+                5.426937103271484,
+                -0.00012000862625427544
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-swimmer-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 33,
+            "objectives": [
+                183.3619384765625,
+                -142.2751007080078
+            ]
+        }
+    }
+}

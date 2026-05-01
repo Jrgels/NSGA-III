@@ -14,12 +14,13 @@ from utils.seed import set_seed
 
 
 def load_policy(checkpoint_path: str, device: torch.device) -> MLPPolicy:
-    checkpoint = torch.load(checkpoint_path, map_location=device)
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     policy = MLPPolicy(
         obs_dim=checkpoint["obs_dim"],
         action_dim=checkpoint["action_dim"],
         hidden_dim=checkpoint["hidden_dim"],
+        action_type=checkpoint.get("action_type", "continuous"),
     )
 
     policy.load_state_dict(checkpoint["state_dict"])
@@ -47,8 +48,8 @@ def render_policy(
 
     obs, info = env.reset(seed=seed)
 
-    action_low = env.action_space.low
-    action_high = env.action_space.high
+    action_low = getattr(env.action_space, "low", None)
+    action_high = getattr(env.action_space, "high", None)
 
     frames = []
     episode_return = None

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import torch
+from gymnasium.spaces import Box, Discrete
 
 
 def evaluate_policy(
@@ -11,18 +12,16 @@ def evaluate_policy(
     num_episodes: int = 1,
     max_steps: int = 1000,
 ) -> np.ndarray:
-    """
-    Evalúa una política en un ambiente multiobjetivo.
-
-    Regresa:
-        Vector promedio de retornos multiobjetivo.
-        Ejemplo para HalfCheetah:
-            [retorno_objetivo_1, retorno_objetivo_2]
-    """
     returns = []
 
-    action_low = env.action_space.low
-    action_high = env.action_space.high
+    is_continuous = isinstance(env.action_space, Box)
+    is_discrete = isinstance(env.action_space, Discrete)
+
+    if not (is_continuous or is_discrete):
+        raise ValueError(f"Action space no soportado: {env.action_space}")
+
+    action_low = env.action_space.low if is_continuous else None
+    action_high = env.action_space.high if is_continuous else None
 
     policy.to(device)
     policy.eval()
@@ -34,9 +33,9 @@ def evaluate_policy(
         for _step in range(max_steps):
             action = policy.act(
                 obs=obs,
+                device=device,
                 action_low=action_low,
                 action_high=action_high,
-                device=device,
             )
 
             obs, reward, terminated, truncated, info = env.step(action)

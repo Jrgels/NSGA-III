@@ -1,0 +1,45 @@
+{
+    "env_id": "mo-ant-v5",
+    "seed": 0,
+    "population_size": 64,
+    "generations": 100,
+    "eval_episodes": 3,
+    "max_steps": 1000,
+    "reward_dim": 3,
+    "final_hypervolume": 49641400.64128,
+    "reference_point": [
+        955.1211547851562,
+        929.0211791992188,
+        513.6465454101562
+    ],
+    "nondominated_count": 63,
+    "representatives": {
+        "best_obj1": {
+            "checkpoint_path": "outputs/mo-ant-v5/seed_0/checkpoints/representative/best_obj1.pt",
+            "pareto_policy_id": 45,
+            "objectives": [
+                1268.55419921875,
+                1086.6541748046875,
+                540.3633422851562
+            ]
+        },
+        "best_obj2": {
+            "checkpoint_path": "outputs/mo-ant-v5/seed_0/checkpoints/representative/best_obj2.pt",
+            "pareto_policy_id": 2,
+            "objectives": [
+                1178.5057373046875,
+                1419.0963134765625,
+                785.6871948242188
+            ]
+        },
+        "balanced": {
+            "checkpoint_path": "outputs/mo-ant-v5/seed_0/checkpoints/representative/balanced.pt",
+            "pareto_policy_id": 37,
+            "objectives": [
+                1158.939208984375,
+                1177.2991943359375,
+                868.4762573242188
+            ]
+        }
+    }
+}
