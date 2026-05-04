@@ -20,7 +20,7 @@ from policies.mlp_policy import MLPPolicy
 from training.evaluate_policy import evaluate_policy
 from utils.device import get_device, print_device_info
 from utils.seed import set_seed
-
+from metrics.hypervolume import compute_hypervolume
 
 def save_policy(policy: MLPPolicy, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -59,6 +59,34 @@ def select_representative_indices(objectives: np.ndarray) -> dict[str, int]:
         "best_obj2": best_obj2,
         "balanced": balanced,
     }
+
+def select_max_hv_contribution_index(
+    objectives: np.ndarray,
+    reference_point: np.ndarray,
+    seed: int = 0,
+) -> int:
+    """
+    Selecciona la política con mayor contribución individual al hypervolume.
+    contribución_i = HV(frente completo) - HV(frente sin i)
+    """
+    full_hv, _ = compute_hypervolume(
+        objectives=objectives,
+        reference_point=reference_point,
+        mc_samples=100_000,
+        seed=seed,
+    )
+
+    contributions = []
+    for i in range(len(objectives)):
+        reduced_objectives = np.delete(objectives, i, axis=0)
+        reduced_hv, _ = compute_hypervolume(
+            objectives=reduced_objectives,
+            reference_point=reference_point,
+            mc_samples=100_000,
+            seed=seed,
+        )
+        contributions.append(full_hv - reduced_hv)
+    return int(np.argmax(contributions))
 
 
 def run_nsga3(
@@ -254,7 +282,12 @@ def run_nsga3(
     pareto_objectives = objectives[final_nondominated_indices]
 
     representatives = select_representative_indices(pareto_objectives)
-
+    max_hv_contrib_idx = select_max_hv_contribution_index(
+        objectives=pareto_objectives,
+        reference_point=reference_point,
+        seed=seed,
+    )
+    representatives["max_hv_contrib"] = max_hv_contrib_idx
     representative_metrics = {}
 
     for name, pareto_local_idx in representatives.items():
